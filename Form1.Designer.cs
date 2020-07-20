@@ -53,7 +53,6 @@
             this.checkedListBox1.Size = new System.Drawing.Size(320, 169);
             this.checkedListBox1.TabIndex = 1;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
-            this.checkedListBox1.SelectedValueChanged += new System.EventHandler(this.checkedListBox1_SelectedValueChanged);
             // 
             // Form1
             // 

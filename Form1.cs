@@ -76,10 +76,6 @@ namespace CPUAffinity
                     pad0(Convert.ToString(num >> 8 & 255, 16), 2) +
                     pad0(Convert.ToString(num & 255, 16), 2);
         }
-
-        private void checkedListBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-        }
     }
 }
 
