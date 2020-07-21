@@ -12,25 +12,38 @@ namespace CPUAffinity
 {
     public partial class Form1 : Form
     {
+        List<CheckBox> checkBoxes = new List<CheckBox>();
+
         public Form1()
         {
+            int left = 10;
+            int top = 10;
+
+            for (int c = 0; c < 64; c++)
+            {
+                CheckBox box = new CheckBox();
+                box.Text = "CPU " + c;
+                box.Location = new System.Drawing.Point(left, top);
+                box.CheckedChanged += new System.EventHandler(this.changed);
+                checkBoxes.Add(box);
+
+                top += 22;
+
+                if ((c + 1) % 8 == 0 && c != 0)
+                {
+                    top = 10;
+                    left += 110;
+                }
+                this.Controls.Add(box);
+            }
+
+
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void changed(object sender, EventArgs e)
         {
-            for (int c = 0; c < 64; c++)
-            {
-                checkedListBox1.Items.Add("CPU " + c);
-            }
-        }
-
-        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(() =>
-            {
-                calculateAffinity();
-            }));
+            calculateAffinity();
         }
 
         private void calculateAffinity()
@@ -38,9 +51,9 @@ namespace CPUAffinity
             int mask_low = 0;
             int mask_high = 0;
 
-            for (int c = 0; c < checkedListBox1.Items.Count; c++)
+            for (int c = 0; c < 64; c++)
             {
-                if (checkedListBox1.GetItemChecked(c))
+                if (checkBoxes[c].Checked)
                 {
                     Console.WriteLine("been here " + c);
                     if (c < 32)
@@ -78,4 +91,3 @@ namespace CPUAffinity
         }
     }
 }
-
